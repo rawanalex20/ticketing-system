@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  resources :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Temporary
+  resources :users
+
+  # TODO: root will be homepage containing project link
+  # Leave this temporary
+  root "users#index"
 end
