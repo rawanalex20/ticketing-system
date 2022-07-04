@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   # Temporary
   # resources :users
 
-  root "projects#shared"
+  root "projects#index"
 end
