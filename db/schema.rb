@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_110915) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.string "description"
     t.string "status"
     t.bigint "project_id"
