@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'shared_projects', to: 'projects#shared', as: 'shared_projects'
   resources :projects do
     resources :tickets
   end
@@ -8,9 +9,7 @@ Rails.application.routes.draw do
   }
 
   # Temporary
-  resources :users
+  # resources :users
 
-  # TODO: root will be homepage containing project link
-  # Leave this temporary
-  root "users#index"
+  root "home#index"
 end

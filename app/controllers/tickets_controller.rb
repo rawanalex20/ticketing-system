@@ -1,6 +1,17 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: %i[ show edit update destroy ]
 
+  # # GET /tickets
+  # def tickets
+  #   projects = current_user.shared_projects
+  #   @tickets = []
+  #   projects.each do |project|
+  #     project.each do |ticket|
+  #       @tickets.append(ticket)
+  #     end
+  #   end
+  # end
+
   # GET /tickets or /tickets.json
   def index
     @tickets = Ticket.where(project_id: params[:project_id])

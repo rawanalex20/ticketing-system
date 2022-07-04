@@ -12,7 +12,8 @@
 
   <body>
     <%if user_signed_in?%>
-        <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
+      <%= render "layouts/side_nav" %>
+      <%= render "layouts/projects_nav" %>
     <%end%>
     <p class="alert"><%= alert %></p>
     <%= yield %>

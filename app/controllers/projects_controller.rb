@@ -1,9 +1,10 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
 
-  # GET /projects or /projects.json
-  def index
-    @projects = Project.all
+  # Shared projects
+  # GET /projects/shared
+  def shared
+    @@projects = current_user.shared_projects
   end
 
   # GET /projects/1 or /projects/1.json
