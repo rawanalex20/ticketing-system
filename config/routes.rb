@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'shared_projects', to: 'projects#shared', as: 'shared_projects'
+  get 'projects', to: 'projects#index', as: 'projects'
   resources :projects do
     resources :tickets
   end
@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   # Temporary
   # resources :users
 
-  root "home#index"
+  root "projects#shared"
 end

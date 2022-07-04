@@ -1,9 +1,18 @@
-<% @projects = current_user.shared_projects %>
 <h1>Projects</h1>
 <%= link_to "New project", new_project_path %>
 <div id="projects">
-  <% @projects.each do |project| %>
-    <%= render project %>
+    <% unless @projects == nil %>
+    <% @projects.each do |project| %>
+        <%= render project %>
+        <% if project.user_id == current_user.id %>
+        owned
+
+        <% # TODO %>
+        <%#= link_to "Invite",  %>
+
+        <%= button_to "delete", project, method: :delete %>
+        <% end %>
+    <% end %>
   <% end %>
 </div>
 
