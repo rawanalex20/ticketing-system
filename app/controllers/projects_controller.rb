@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # Shared projects
   # GET /projects
   def index
-    @projects = current_user.shared_projects
+    @@projects = current_user.shared_projects
   end
 
   # GET /projects/1 or /projects/1.json
@@ -18,6 +18,11 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+  end
+
+  # POST /projects/1/invite
+  def invite
+    
   end
 
   # POST /projects or /projects.json
