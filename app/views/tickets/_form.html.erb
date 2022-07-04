@@ -28,8 +28,13 @@
   </div>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+    <%= form.radio_button :status, "ToDo",checked: true %>
+    <%= form.label :status, "ToDo" %>
+    <%= form.radio_button :status, "InProgress" %>
+    <%= form.label :status, "InProgress" %>
+    <%= form.radio_button :status, "Done" %>
+    <%= form.label :status, "Done" %>
+
   </div>
 
   <div>
