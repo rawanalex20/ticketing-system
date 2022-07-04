@@ -27,6 +27,8 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem "ffi", ">= 1.0.11"
+
 # Devise authentication
 gem 'devise', '~> 4.8', '>= 4.8.1'
 
