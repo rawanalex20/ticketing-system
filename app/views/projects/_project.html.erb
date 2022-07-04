@@ -1,7 +1,7 @@
 <div id="<%= dom_id project %>">
   <p>
     <strong>Project name:</strong>
-    <%= project.project_name %>
+    <%= link_to "#{project.project_name}", project_tickets_path(project_id: project.id)%>
   </p>
 
 </div>

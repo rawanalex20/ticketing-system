@@ -1,4 +1,10 @@
-<%= form_with(model: ticket) do |form| %>
+<% if request.env['PATH_INFO'] == "/projects/#{@ticket.project_id}/tickets/new"%> 
+  <% url = "/projects/#{@ticket.project_id}/tickets" %>
+<% else %>
+  <% url = "/projects/#{@ticket.project_id}/tickets/#{@ticket.id}" %>
+<% end %>
+
+<%= form_with(model:  [@ticket.project, @ticket], url: url) do |form| %>
   <% if ticket.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
@@ -24,6 +30,10 @@
   <div>
     <%= form.label :status, style: "display: block" %>
     <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :project_id %>
   </div>
 
   <div>

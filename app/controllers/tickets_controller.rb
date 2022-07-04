@@ -3,7 +3,12 @@ class TicketsController < ApplicationController
 
   # GET /tickets or /tickets.json
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.where(project_id: params[:project_id])
+
+    if @tickets == nil
+      @tickets = []
+    end
+    @project = Project.find(params[:project_id])
   end
 
   # GET /tickets/1 or /tickets/1.json
@@ -13,6 +18,7 @@ class TicketsController < ApplicationController
   # GET /tickets/new
   def new
     @ticket = Ticket.new
+    @ticket.project = Project.find(params[:project_id])
   end
 
   # GET /tickets/1/edit
@@ -22,10 +28,12 @@ class TicketsController < ApplicationController
   # POST /tickets or /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
+    p "PROJECT #{params[:project_id]}"
+    @ticket.project_id = params[:project_id]
 
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully created." }
+        format.html { redirect_to project_ticket_url(project_id: @ticket.project.id, id: @ticket.id), notice: "Ticket was successfully created." }
         format.json { render :show, status: :created, location: @ticket }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +46,7 @@ class TicketsController < ApplicationController
   def update
     respond_to do |format|
       if @ticket.update(ticket_params)
-        format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully updated." }
+        format.html { redirect_to project_ticket_url(project_id: @ticket.project.id, id: @ticket.id), notice: "Ticket was successfully updated." }
         format.json { render :show, status: :ok, location: @ticket }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +60,7 @@ class TicketsController < ApplicationController
     @ticket.destroy
 
     respond_to do |format|
-      format.html { redirect_to tickets_url, notice: "Ticket was successfully destroyed." }
+      format.html { redirect_to project_tickets_url, notice: "Ticket was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -65,6 +73,6 @@ class TicketsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ticket_params
-      params.require(:ticket).permit(:title, :description, :status)
+      params.require(:ticket).permit(:title, :description, :status, :project_id)
     end
 end

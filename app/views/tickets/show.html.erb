@@ -3,8 +3,8 @@
 <%= render @ticket %>
 
 <div>
-  <%= link_to "Edit this ticket", edit_ticket_path(@ticket) %> |
-  <%= link_to "Back to tickets", tickets_path %>
+  <%= link_to "Edit this ticket", edit_project_ticket_path(project_id: @ticket.project_id) %> |
+  <%= link_to "Back to tickets", project_tickets_path %>
 
-  <%= button_to "Destroy this ticket", @ticket, method: :delete %>
+  <%= button_to "Destroy this ticket", project_ticket_path(project_id: @ticket.project.id, id: @ticket.id), method: :delete %>
 </div>
