@@ -18,7 +18,6 @@ class TicketsController < ApplicationController
 
   # PATCH /ticket/1/attach
   def save_attach
-    p "KKKKKKKKKKKK #{params[:uploads]}"
     @ticket.uploads = params[:uploads]
     respond_to do |format|
       if @ticket.save#update(ticket_params)
