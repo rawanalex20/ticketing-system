@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
     # routes to render form and send invitation
     post 'invite', to: 'projects#invite', as:'invite'
-    post 'invite_form', to: 'projects#invite_form', as:'invite_form'
+    post 'invite_form', to: 'projects#invite_form', as:'invite_form' # old way of sharing projects, replace path in the button with the new one
+
+
+    # mail
+    post 'share_project', to: 'projects#share_project', as:'share_project'
 
     # attachments
     get '/tickets/:id/attach', to: 'tickets#attach', as: 'attach'
@@ -18,6 +22,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
+
 
   root "projects#index"
 end
