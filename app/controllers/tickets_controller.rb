@@ -6,14 +6,39 @@ class TicketsController < ApplicationController
   def index
     @tickets = Ticket.where(project_id: params[:project_id])
 
+    # Initialize it to array if its nil for looping
     if @tickets == nil
       @tickets = []
     end
+
     @project = Project.find(params[:project_id])
   end
 
-  # GET /ticket/attach
+  # GET /ticket/1/attach
   def attach
+  end
+
+  # POST /ticket/1/due
+  def due_date
+  end
+
+  # GET /ticket/1/due
+  def due
+    # This is way assuming the app is running in production and job 
+    # is set to perform on the due date
+    respond_to do |format|
+      # TODO: Job for this ticket to send emails to users accessing this project by the time of due date
+      @ticket = Ticket.find(params[:id])
+      p "FFFFFFF    #{params[:due]}      FFFFFFFFF"
+      @ticket.due = params[:due]
+      @ticket.due_set = true
+
+      if @ticket.save
+        format.html { redirect_to project_tickets_url, notice: "Due date is successfully set." }
+      else
+        format.html { redirect_to project_tickets_url, notice: "Something wents wrong." }
+      end
+    end
   end
 
   # PATCH /ticket/1/attach
@@ -91,6 +116,6 @@ class TicketsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ticket_params
-      params.require(:ticket).permit(:title, :description, :status, :project_id, uploads: @ticket.uploads)
+      params.require(:ticket).permit(:title, :description, :status, :project_id, :due, uploads: [])
     end
 end

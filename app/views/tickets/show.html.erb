@@ -8,4 +8,12 @@
  
 
   <%= button_to "Destroy this ticket", project_ticket_path(project_id: @ticket.project.id, id: @ticket.id), method: :delete %>
+
+  <!--checking if due date is set as a job already running to meet this deadline--!>
+  <% if @ticket.due_set %>
+    <p> Due date: <%= @ticket.due %> </p>
+    
+  <% else %>
+  <%= button_to "Due date", project_ticket_due_path(project_id: @ticket.project.id, id: @ticket.id)%>
+  <% end %>
 </div>

@@ -1,0 +1,7 @@
+<%= form_with url: project_ticket_due_url, local: true, method: :get do %>
+    <div>
+    <%= label_tag "due" %><br />
+    <%= date_field_tag :due %>
+    </div>
+    <%= submit_tag "Set due" %>
+<% end %>

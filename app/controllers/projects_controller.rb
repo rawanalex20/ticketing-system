@@ -27,19 +27,29 @@ class ProjectsController < ApplicationController
   # POST /projects/1/invite_form
   def invite_form
     respond_to do |format|
+      # Get user by email
       user = User.where(email: params[:email]).first
+
+      # If exists check if it is not the same user
       unless user == nil
         unless user == current_user
-        # TODO
-        @project = Project.find(params[:project_id])
+          # Check if it is not already shared with this user
+          unless project.editors.include?(user)
 
-        InviteMailer.with(project: @project, email: params[:email], user: current_user).new_invite_email.deliver_now
+            # Get project to share and email to send to
+            project = Project.find(params[:project_id])
+            email = params[:email]
 
-        @project.editors.append(user)
-        
-        # TODO: check if it is already shared with this user
+            # Perform invitation job
+            SendInviteJob.perform_now(project, email, user)
 
-        format.html { redirect_to project_tickets_url, notice: "Invitation was successfully sent." }
+            # Add user to editors of project so he can access it
+            project.editors.append(user)
+
+            format.html { redirect_to project_tickets_url, notice: "Invitation was successfully sent." }
+          else
+            format.html { redirect_to project_tickets_url, notice: "User can already access." }
+          end
         else
           format.html { redirect_to project_tickets_url, notice: "Cannot enter your email." }
         end

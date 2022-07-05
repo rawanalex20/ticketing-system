@@ -11,7 +11,12 @@
     <strong><%= ticket.status %></strong>
   </p>
   <% ticket.uploads.each do |upload| %> 
-    <%p IMAGEEEE%>
     <%= image_tag upload %> 
   <% end %>
+
+  <% if ticket.due_set %>
+    <p> Due date: <%= ticket.due %> </p>
+    <% else %>
+    <%= button_to "Due date", project_ticket_due_path(id: ticket.id)%>
+    <% end %>
 </div>
