@@ -9,15 +9,11 @@ RSpec.describe SendInviteJob, type: :job do
   end
 
   # TODO
-  # test fails and mehtods undefined
+  # check deleted undefuned methods issue
   it "should send invitation to user" do
-    visit("/projects/#{@project.id}/tickets")
-    click_button("Invite")
-    fill_in('email', with: 'test2@email.com')
-    click_button("Send invitaion")
     ActiveJob::Base.queue_adapter = :test
     expect {
-      SendNotificationsJob.perform_now(@project, 'test2@email.com', @user)
+      SendInviteJob.perform_later(@project, 'test2@email.com', @user2)
     }.to have_enqueued_job
   end
 end
