@@ -1,17 +1,17 @@
 <div id="<%= dom_id ticket %>">
   <p>
-    <strong>Title:</strong>
-    <%= ticket.title %>
+    <strong><%= ticket.title %></strong>
   </p>
 
   <p>
-    <strong>Description:</strong>
     <%= ticket.description %>
   </p>
 
   <p>
-    <strong>Status:</strong>
-    <%= ticket.status %>
+    <strong><%= ticket.status %></strong>
   </p>
-
+  <% ticket.uploads.each do |upload| %> 
+    <%p IMAGEEEE%>
+    <%= image_tag upload %> 
+  <% end %>
 </div>

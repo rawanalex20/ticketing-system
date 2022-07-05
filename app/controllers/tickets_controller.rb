@@ -1,17 +1,7 @@
 class TicketsController < ApplicationController
-  before_action :set_ticket, only: %i[ show edit update destroy ]
+  before_action :set_ticket, only: %i[ show edit update destroy save_attach attach ]
 
-  # # GET /tickets
-  # def tickets
-  #   projects = current_user.shared_projects
-  #   @tickets = []
-  #   projects.each do |project|
-  #     project.each do |ticket|
-  #       @tickets.append(ticket)
-  #     end
-  #   end
-  # end
-
+  # All routes are preceeded with project
   # GET /tickets or /tickets.json
   def index
     @tickets = Ticket.where(project_id: params[:project_id])
@@ -20,6 +10,25 @@ class TicketsController < ApplicationController
       @tickets = []
     end
     @project = Project.find(params[:project_id])
+  end
+
+  # GET /ticket/attach
+  def attach
+  end
+
+  # PATCH /ticket/1/attach
+  def save_attach
+    p "KKKKKKKKKKKK #{params[:uploads]}"
+    @ticket.uploads = params[:uploads]
+    respond_to do |format|
+      if @ticket.save#update(ticket_params)
+        format.html { redirect_to project_ticket_url(project_id: @ticket.project.id, id: @ticket.id), notice: "Ticket was successfully updated." }
+        format.json { render :show, status: :ok, location: @ticket }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /tickets/1 or /tickets/1.json
@@ -39,7 +48,6 @@ class TicketsController < ApplicationController
   # POST /tickets or /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
-    p "PROJECT #{params[:project_id]}"
     @ticket.project_id = params[:project_id]
 
     respond_to do |format|
@@ -84,6 +92,6 @@ class TicketsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ticket_params
-      params.require(:ticket).permit(:title, :description, :status, :project_id)
+      params.require(:ticket).permit(:title, :description, :status, :project_id, uploads: @ticket.uploads)
     end
 end

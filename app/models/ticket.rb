@@ -5,4 +5,5 @@ class Ticket < ApplicationRecord
     validates :description, presence: true
     validates :status, inclusion: { in: %w(ToDo InProgress Done), message: "%{value} is not valid" }
 
+    has_many_attached :uploads
 end

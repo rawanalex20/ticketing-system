@@ -1,5 +1,9 @@
+<% is_attached = false %>
 <% if request.env['PATH_INFO'] == "/projects/#{@ticket.project_id}/tickets/new"%> 
   <% url = "/projects/#{@ticket.project_id}/tickets" %>
+<% elsif request.env['PATH_INFO'] == "/projects/#{@ticket.project_id}/tickets/#{@ticket.id}/attach"%> 
+  <% url = "/projects/#{@ticket.project_id}/tickets/#{@ticket.id}/save_attach" %>
+  <% is_attached = true %>
 <% else %>
   <% url = "/projects/#{@ticket.project_id}/tickets/#{@ticket.id}" %>
 <% end %>
@@ -16,7 +20,7 @@
       </ul>
     </div>
   <% end %>
-
+  <% unless is_attached %>
   <div>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title %>
@@ -36,6 +40,12 @@
     <%= form.label :status, "Done" %>
 
   </div>
+  <% else %>
+    <div> 
+      <%= form.label :uploads, style: "display: block" %> 
+      <%= form.file_field :uploads , multiple:true %> 
+    </div>
+  <% end %>
 
   <div>
     <%= form.hidden_field :project_id %>
@@ -44,4 +54,5 @@
   <div>
     <%= form.submit %>
   </div>
+  
 <% end %>
