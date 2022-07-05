@@ -31,9 +31,6 @@ class ProjectsController < ApplicationController
       unless user == nil
         unless user == current_user
         # TODO
-        # Save in Mailbox table
-
-        # TODO
         # SendInvitationMailJob
         format.html { redirect_to project_tickets_url, notice: "Invitation was successfully sent." }
         else
