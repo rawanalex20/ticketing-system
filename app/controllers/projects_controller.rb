@@ -27,13 +27,18 @@ class ProjectsController < ApplicationController
   # POST /projects/1/invite_form
   def invite_form
     respond_to do |format|
-      unless User.where(email: params[:email]).count == 0
+      user = User.where(email: params[:email]).first
+      unless user == nil
+        unless user == current_user
         # TODO
         # Save in Mailbox table
 
         # TODO
         # SendInvitationMailJob
         format.html { redirect_to project_tickets_url, notice: "Invitation was successfully sent." }
+        else
+          format.html { redirect_to project_tickets_url, notice: "Cannot enter your email." }
+        end
       else
         format.html { redirect_to project_tickets_url, notice: "Invalid email." }
       end
