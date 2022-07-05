@@ -58,6 +58,9 @@ gem 'image_processing', '~> 1.12', '>= 1.12.1'
 # Used in rails concole to avoid a bug causing the error (Object doesn't support #inspect)
 gem 'pry-rails'
 
+# AWS storage
+gem "aws-sdk-s3", require: false
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
