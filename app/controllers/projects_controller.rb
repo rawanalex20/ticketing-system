@@ -31,7 +31,14 @@ class ProjectsController < ApplicationController
       unless user == nil
         unless user == current_user
         # TODO
-        # SendInvitationMailJob
+        @project = Project.find(params[:project_id])
+
+        InviteMailer.with(project: @project, email: params[:email], user: current_user).new_invite_email.deliver_now
+
+        @project.editors.append(user)
+        
+        # TODO: check if it is already shared with this user
+
         format.html { redirect_to project_tickets_url, notice: "Invitation was successfully sent." }
         else
           format.html { redirect_to project_tickets_url, notice: "Cannot enter your email." }
