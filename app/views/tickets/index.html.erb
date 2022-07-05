@@ -1,4 +1,6 @@
 <h1>Tickets</h1>
+<p style="color: green"><%= notice %></p>
+<%= button_to "Invite", project_invite_url(project_id: @project.id) %>
 <%= link_to "New ticket", new_project_ticket_path(project_id: @project.id) %>
 
 <div id="tickets">

@@ -6,7 +6,7 @@ class Project < ApplicationRecord
 
     has_many :tickets, dependent: :destroy
 
-    validates :project_name, presence: true
+    validates :project_name, presence: true, uniqueness: true
 
     private
 

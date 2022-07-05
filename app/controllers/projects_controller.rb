@@ -22,7 +22,22 @@ class ProjectsController < ApplicationController
 
   # POST /projects/1/invite
   def invite
-    
+  end
+
+  # POST /projects/1/invite_form
+  def invite_form
+    respond_to do |format|
+      unless User.where(email: params[:email]).count == 0
+        # TODO
+        # Save in Mailbox table
+
+        # TODO
+        # SendInvitationMailJob
+        format.html { redirect_to project_tickets_url, notice: "Invitation was successfully sent." }
+      else
+        format.html { redirect_to project_tickets_url, notice: "Invalid email." }
+      end
+    end
   end
 
   # POST /projects or /projects.json
@@ -72,6 +87,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:project_name)
+      params.require(:project).permit(:project_name, :email)
     end
 end
