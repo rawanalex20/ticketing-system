@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'projects', to: 'projects#index', as: 'projects'
   resources :projects do
     resources :tickets
 
