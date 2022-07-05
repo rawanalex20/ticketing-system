@@ -1,21 +1,20 @@
-<div id="<%= dom_id ticket %>">
-  <p>
-    <strong><%= ticket.title %></strong>
-  </p>
+<div id="<%= dom_id ticket %>", class="w3-bar-item w3-button w3-padding ticket-card", style="margin:3%;background-color:#f2f4f5;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+
+  <h4><strong><%= ticket.title %></strong></h4>
 
   <p>
     <%= ticket.description %>
   </p>
 
   <p>
-    <strong><%= ticket.status %></strong>
+    <strong>Status: </strong><%= ticket.status %>
   </p>
   <% ticket.uploads.each do |upload| %> 
     <%= image_tag upload %> 
   <% end %>
 
   <% if ticket.due_set %>
-    <p> Due date: <%= ticket.due %> </p>
+  <strong>Due date:  </strong><br><%= ticket.due.strftime('%m/%d/%Y') %>
     <% else %>
     <%= button_to "Due date", project_ticket_due_path(id: ticket.id)%>
     <% end %>

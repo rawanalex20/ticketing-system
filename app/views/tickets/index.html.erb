@@ -1,17 +1,24 @@
-<h1>Tickets</h1>
-<p style="color: green"><%= notice %></p>
-<%= button_to "Invite", project_invite_url(project_id: @project.id) %>
-<%= link_to "New ticket", new_project_ticket_path(project_id: @project.id) %>
-
-<div id="tickets">
-  <% @tickets.each do |ticket| %>
-    <%= render ticket %>
+<header class="w3-container" style="padding-top:22px">
+  <div>
+  <h6>
+    <%= link_to "New ticket", new_project_ticket_path(project_id: @project.id), class:"w3-container", style:"float:right; display:inline" %>
+    <%= button_to "Invite", project_invite_url(project_id: @project.id), style:"float:right; display:inline" %>
+  </h6>
+  </div>
+    <h1 ><b> <%= @project.project_name %> </b></h1>
     
+<p style="color: green"><%= notice %></p>
 
-    <p>
-      <%= link_to "Show this ticket", project_ticket_path(project_id: @project.id, id: ticket.id) %>
-    </p>
+</header>
+
+<div id="">
+  <% @tickets.each do |ticket| %>
+    <a href="/projects/<%=@project.id%>/tickets/<%=ticket.id%>">
+    
+      <span class="w3"><%= render ticket %></span>
+   
   <% end %>
+  <hr>
 </div>
 
 

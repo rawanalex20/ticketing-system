@@ -33,12 +33,12 @@ class ProjectsController < ApplicationController
       # If exists check if it is not the same user
       unless user == nil
         unless user == current_user
+          # Get project to share and email to send to
+          project = Project.find(params[:project_id])
+          email = params[:email]
+
           # Check if it is not already shared with this user
           unless project.editors.include?(user)
-
-            # Get project to share and email to send to
-            project = Project.find(params[:project_id])
-            email = params[:email]
 
             # Perform invitation job
             SendInviteJob.perform_now(project, email, user)

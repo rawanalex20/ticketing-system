@@ -1,7 +1,6 @@
 <%= render @ticket %>
 
 <div>
-<%p "FROM SHOW.HTML #{@ticket}"%>
   <%= link_to "Edit this ticket", edit_project_ticket_path(project_id: @ticket.project_id) %> |
   <%= link_to "Back to tickets", project_tickets_path %>
   <%= link_to "Attach files", project_attach_path(project_id: @ticket.project_id) %>
@@ -11,9 +10,10 @@
 
   <!--checking if due date is set as a job already running to meet this deadline--!>
   <% if @ticket.due_set %>
-    <p> Due date: <%= @ticket.due %> </p>
+    <p> Due date: <%= @ticket.due.strftime('%m/%d/%Y') %> </p>
     
   <% else %>
   <%= button_to "Due date", project_ticket_due_path(project_id: @ticket.project.id, id: @ticket.id)%>
   <% end %>
 </div>
+
