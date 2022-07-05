@@ -1,5 +1,4 @@
 class SharingMailbox < ApplicationMailbox
-  skip_before_action :verify_authenticity_token
   before_processing :find_user
   MATCHER = /reply-(.+)@reply.example.com/i 
   # mail => Mail object
