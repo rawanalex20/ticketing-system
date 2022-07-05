@@ -38,7 +38,6 @@ class TicketsController < ApplicationController
         # days = days.to_i % 365
         # Assuming the app is running in production and job 
         # is set to perform on the due date
-        p "JJJJJJJ #{days} LLLLLLL"
         SendReminderJob.set(wait: days.day).perform_later(@ticket)
 
         format.html { redirect_to project_tickets_url, notice: "Due date is successfully set." }

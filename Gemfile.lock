@@ -134,7 +134,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
-    minitest (5.16.1)
+    minitest (5.16.2)
     msgpack (1.5.3)
     net-imap (0.2.3)
       digest
@@ -286,6 +286,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  actionmailbox (~> 7.0, >= 7.0.3)
   bootsnap
   capybara
   debug
