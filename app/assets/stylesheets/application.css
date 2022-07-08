@@ -42,11 +42,14 @@
         margin:1%;
         background-color:#f2f5f2;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        width: 30%;
-        height: 240px;
+        width: 30% ;
+        height: 240px auto;
         padding-top: 1% !important;
         padding-bottom: 2% !important;
         text-align: left !important;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
     .msg-empty {
       margin: 20%;
