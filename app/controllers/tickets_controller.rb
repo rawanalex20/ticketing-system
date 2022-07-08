@@ -39,12 +39,11 @@ class TicketsController < ApplicationController
 
       if @ticket.save
         # To determine no. of days
-        # Assuming sue won't last more than a year
-        #@ticket.due.strftime("%j")
-        days = @ticket.due.yday - Date.today.yday 
-        # days = days.to_i % 365
-        # Assuming the app is running in production and job 
-        # is set to perform on the due date
+        # Assuming due won't last more than a year
+        days = @ticket.due.yday - Date.today.yday
+
+        # Works better on production as it is always 
+        # active and jobs will stay active till delivery
         SendReminderJob.set(wait: days.day).perform_later(@ticket)
 
         format.html { redirect_to project_tickets_url, notice: "Due date is successfully set." }
