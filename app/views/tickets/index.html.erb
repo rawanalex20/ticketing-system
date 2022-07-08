@@ -3,8 +3,6 @@
   <h6>
     <%= button_to "Invite", project_invite_url(project_id: @project.id), style:"float:right; display:inline;margin:0.5%;" %>
     <%= link_to "New ticket", new_project_ticket_path(project_id: @project.id), class:"w3-container w3-bar-item w3-button w3-padding", style:"float:right; display:inline;" %>
-
-    <% button_to "Invite", project_share_project_path(project_id: @project.id), style:"float:right; display:inline" %>
   
     </h6>
   </div>

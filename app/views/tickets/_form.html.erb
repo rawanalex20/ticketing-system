@@ -1,5 +1,5 @@
 
-<%= form_with(model:  [@ticket.project, @ticket], url: project_ticket_path) do |form| %>
+<%= form_with(model:  [@ticket.project, @ticket]) do |form| %>
   <% if ticket.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
