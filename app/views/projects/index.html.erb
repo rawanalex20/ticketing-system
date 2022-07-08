@@ -1,5 +1,8 @@
 
 Most Recent
+<% if @tickets.count == 0 %>
+<div class="msg-empty">no recent tickets</div>
+<% end %>
 
 <div id="recent-tickets">
 <% @tickets.each do |ticket| %>

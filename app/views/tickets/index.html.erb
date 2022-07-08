@@ -13,6 +13,10 @@
 <p style="color: green"><%= notice %></p>
 
 </header>
+<hr>
+<% if @tickets.count == 0 %>
+<div class="msg-empty">empty project</div>
+<% end %>
 
 <div id="tickets">
   <% @tickets.each do |ticket| %>
@@ -21,7 +25,7 @@
       <span class="w3"><%= render ticket %></span>
     </a>
   <% end %>
-  <hr>
+  
 </div>
 
 

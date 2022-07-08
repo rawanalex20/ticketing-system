@@ -48,3 +48,8 @@
         padding-bottom: 2% !important;
         text-align: left !important;
     }
+    .msg-empty {
+      margin: 20%;
+      text-align: center;
+      opacity: 0.4;
+    }
