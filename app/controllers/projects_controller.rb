@@ -5,6 +5,12 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     @@projects = current_user.shared_projects
+    @tickets = Ticket.last(8).reverse
+
+    # Initialize it to array if its nil for looping
+    if @tickets == nil
+      @tickets = []
+    end
   end
 
   # GET /projects/1 or /projects/1.json
