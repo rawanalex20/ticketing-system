@@ -32,7 +32,7 @@ Emails are configured with smtp and sent on gmail. Production configurations use
 
 ## Storage
 
-The app uses local storage so you can view pictures and files only if they are stored on your local machine. To use amazon storage you can comment out a3 configurations section and write your credetentials. 
+The app uses local storage so you can view pictures and files only if they are stored on your local machine. To use a3 storage or any other service add configurations for this service and write your credetentials. [https://edgeguides.rubyonrails.org/active_storage_overview.html#setup](https://edgeguides.rubyonrails.org/active_storage_overview.html#setup)
 
 # Demo
 
