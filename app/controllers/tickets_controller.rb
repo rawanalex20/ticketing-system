@@ -14,10 +14,6 @@ class TicketsController < ApplicationController
     @project = Project.find(params[:project_id])
   end
 
-  # GET /ticket/1/attach
-  def attach
-  end
-
   # POST /ticket/1/change_status
   def change_status
     # change
@@ -54,20 +50,6 @@ class TicketsController < ApplicationController
         format.html { redirect_to project_tickets_url, notice: "Due date is successfully set." }
       else
         format.html { redirect_to project_tickets_url, notice: "Something went wrong." }
-      end
-    end
-  end
-
-  # PATCH /ticket/1/attach
-  def save_attach
-    @ticket.uploads = params[:uploads]
-    respond_to do |format|
-      if @ticket.save#update(ticket_params)
-        format.html { redirect_to project_ticket_url(project_id: @ticket.project.id, id: @ticket.id), notice: "Ticket was successfully updated." }
-        format.json { render :show, status: :ok, location: @ticket }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
   end

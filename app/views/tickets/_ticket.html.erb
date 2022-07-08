@@ -1,4 +1,8 @@
+<% unless @ticket == nil %>
+<div id="<%= dom_id ticket %>", class="w3-bar-item w3-button w3-padding ticket-card no-wrap">
+<% else %>
 <div id="<%= dom_id ticket %>", class="w3-bar-item w3-button w3-padding ticket-card">
+<% end %>
 
   <h4><strong><%= ticket.title %></strong></h4>
 
@@ -10,7 +14,11 @@
     <strong>Status: </strong><%= ticket.status %>
   </p>
   <% ticket.uploads.each do |upload| %> 
-    <%= image_tag upload %> 
+    <% unless @ticket == nil %>
+    <%= image_tag upload %>
+    <% else %>
+    <%= image_tag upload ,class:"image" %>
+    <% end %>
   <% end %>
 
   <% if ticket.due_set %>

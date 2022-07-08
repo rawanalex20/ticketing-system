@@ -1,14 +1,5 @@
-<% is_attached = false %>
-<% if request.env['PATH_INFO'] == "/projects/#{@ticket.project_id}/tickets/new"%> 
-  <% url = "/projects/#{@ticket.project_id}/tickets" %>
-<% elsif request.env['PATH_INFO'] == "/projects/#{@ticket.project_id}/tickets/#{@ticket.id}/attach"%> 
-  <% url = "/projects/#{@ticket.project_id}/tickets/#{@ticket.id}/save_attach" %>
-  <% is_attached = true %>
-<% else %>
-  <% url = "/projects/#{@ticket.project_id}/tickets/#{@ticket.id}" %>
-<% end %>
 
-<%= form_with(model:  [@ticket.project, @ticket], url: url) do |form| %>
+<%= form_with(model:  [@ticket.project, @ticket], url: project_ticket_path) do |form| %>
   <% if ticket.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
@@ -20,7 +11,6 @@
       </ul>
     </div>
   <% end %>
-  <% unless is_attached %>
   <div>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title %>
@@ -40,12 +30,11 @@
     <%= form.label :status, "Done" %>
 
   </div>
-  <% else %>
-    <div> 
-      <%= form.label :uploads, style: "display: block" %> 
-      <%= form.file_field :uploads , multiple:true %> 
-    </div>
-  <% end %>
+
+  <div> 
+    <%= form.label :uploads, style: "display: block" %> 
+    <%= form.file_field :uploads , multiple:true %> 
+  </div>
 
   <div>
     <%= form.hidden_field :project_id %>
