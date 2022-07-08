@@ -14,8 +14,13 @@
   <% end %>
 
   <% if ticket.due_set %>
-  <strong>Due date:  </strong><br><%= ticket.due.strftime('%m/%d/%Y') %>
-    <% else %>
-    <%= button_to "Due date", project_ticket_due_path(id: ticket.id)%>
-    <% end %>
+    <div style="color:blue;"><strong>Due date:  </strong><%= ticket.due.strftime('%m/%d/%Y') %></div>
+  <% else %>
+  <%= button_to "Due date", project_ticket_due_path(id: ticket.id)%>
+  <% end %>
+  <div style="padding:10px">
+  <%= button_to "Done", project_ticket_change_status_url(id: ticket.id, status: "Done"),  style:"float:left;margin:10px;background-color:#bd2828;color:white;" %>
+  <%= button_to "To Do", project_ticket_change_status_url(id: ticket.id, status: "ToDo"), style:"float:left;margin:10px;background-color:#07810a;color:white;" %>
+  <%= button_to "In Progress", project_ticket_change_status_url(id: ticket.id, status: "InProgress"), style:"float:left;margin:10px;background-color:#3919ad;color:white;" %>
+  </div>
 </div>

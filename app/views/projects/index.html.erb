@@ -1,21 +1,21 @@
 
 Most Recent
 
-<div id="tickets">
+<div id="recent-tickets">
 <% @tickets.each do |ticket| %>
   <a href="/projects/<%=ticket.project.id%>/tickets/<%=ticket.id%>">
   
     <span class="w3">
     <div class="w3-bar-item w3-button w3-padding ticket-card">
-    <h4>Project: <%=ticket.project.project_name %></h4>
     <h4><strong><%= ticket.title %></strong></h4>
+    <p>Project: <%=ticket.project.project_name %></p>
 
     <p>
         <strong>Status: </strong><%= ticket.status %>
     </p>
 
     <% if ticket.due_set %>
-    <strong>Due date:  </strong><br><%= ticket.due.strftime('%m/%d/%Y') %>
+    <div style="color:blue;"><strong>Due date:  </strong><%= ticket.due.strftime('%m/%d/%Y') %></div>
     <% else %>
     <%= button_to "Due date", project_ticket_due_path(project_id: ticket.project.id,id: ticket.id)%>
     <% end %>

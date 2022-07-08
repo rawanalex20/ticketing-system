@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :set_ticket, only: %i[ show edit update destroy save_attach attach ]
+  before_action :set_ticket, only: %i[ show edit update destroy save_attach attach change_status ]
 
   # All routes are preceeded with project
   # GET /tickets or /tickets.json
@@ -16,6 +16,17 @@ class TicketsController < ApplicationController
 
   # GET /ticket/1/attach
   def attach
+  end
+
+  # POST /ticket/1/change_status
+  def change_status
+    # change
+    @ticket.status = params[:status]
+    @ticket.save
+    
+    # redirect
+    redirect_to project_tickets_url
+
   end
 
   # POST /ticket/1/due
@@ -42,7 +53,7 @@ class TicketsController < ApplicationController
 
         format.html { redirect_to project_tickets_url, notice: "Due date is successfully set." }
       else
-        format.html { redirect_to project_tickets_url, notice: "Something wents wrong." }
+        format.html { redirect_to project_tickets_url, notice: "Something went wrong." }
       end
     end
   end
