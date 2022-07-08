@@ -4,13 +4,11 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p><%= @user.email %> has shared <%= @project.project_name %> with you!</p>
+    <p><%= @current_user.email %> has shared <%= @project.project_name %> with you!</p>
 
     --------------------------
     
     <p>Poject link: \projects\<%= @project.project_name %></p>
-    <br><br>
-    <p> This is a preview email </p>
 
 </body>
 </html>

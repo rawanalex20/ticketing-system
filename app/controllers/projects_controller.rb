@@ -62,7 +62,7 @@ class ProjectsController < ApplicationController
           unless project.editors.include?(user)
 
             # Perform invitation job
-            SendInviteJob.perform_now(project, email, user)
+            InviteMailer.with(project: project, email: email, user: user, current_user: current_user).new_invite_email.deliver_now
 
             # Add user to editors of project so he can access it
             project.editors.append(user)
