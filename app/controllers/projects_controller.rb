@@ -27,10 +27,10 @@ class ProjectsController < ApplicationController
   end
 
   # mailbox not fully implemented
-  # POST /projects/1/share_project
-  def share_project
-    redirect_to '/rails/conductor/action_mailbox/inbound_emails'
-  end
+  # # POST /projects/1/share_project
+  # def share_project
+  #   redirect_to '/rails/conductor/action_mailbox/inbound_emails'
+  # end
 
   # POST /projects/1/invite
   def invite
@@ -58,8 +58,7 @@ class ProjectsController < ApplicationController
             # Add user to editors of project so he can access it
             project.editors.append(user)
 
-            # Preview for the mock email. Real email needs configurations as needed. 
-            format.html { redirect_to '/rails/mailers/invite_mailer/new_invite_email', notice: "Invitation was successfully sent." }
+            format.html { redirect_to project_tickets_url, notice: "Invitation was successfully sent." }
           else
             format.html { redirect_to project_tickets_url, notice: "User can already access." }
           end
