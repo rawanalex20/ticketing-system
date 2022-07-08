@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+
+    html,body,h1,h2,h3,h4,h5 {
+        font-family: "Raleway", sans-serif;
+    }
+    html,body {
+        background-color: #f4f7f8;
+    }
+    .btn-del-pr {
+      float: right;
+    }
+    a {
+      text-decoration: none;
+    }
+    .w3-bar-block {
+      background-color: #e9eef0;
+    }
+    .b1 {
+        height: 23%;
+    }
+    .b2 {
+        height: 100%;
+    }
+    #projects a {
+        height: 70px;
+    }
+    .ticket-card {
+        margin:1%;
+        background-color:#f2f4f5;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        width: 30%;
+        height: 220px;
+        padding-top: 1% !important;
+        padding-bottom: 2% !important;
+    }
