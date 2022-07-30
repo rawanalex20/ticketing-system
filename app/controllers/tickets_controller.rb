@@ -5,12 +5,6 @@ class TicketsController < ApplicationController
   # GET /tickets
   def index
     @tickets = current_user.shared_projects.find(params[:project_id]).tickets
-
-    # Initialize it to array if its nil for looping
-    if @tickets == nil
-      @tickets = []
-    end
-
     @project = current_user.shared_projects.find(params[:project_id])
   end
 
