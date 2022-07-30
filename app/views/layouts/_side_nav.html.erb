@@ -17,8 +17,8 @@
       <div class="w3-bar-block b2">
         <div class="w3-bar-item w3-padding w3-blue"> Shared Projects</div>
         <div id="projects">
-        <% @@projects = current_user.shared_projects %>
-        <% @@projects.each do |project| %>
+        <% @projects = current_user.shared_projects %>
+        <% @projects.each do |project| %>
   
             <a href="/projects/<%=project.id%>/tickets" class="w3-bar-item w3-button w3-padding" >
             <div><%=project.project_name%></div>

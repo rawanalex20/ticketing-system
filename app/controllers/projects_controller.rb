@@ -4,13 +4,13 @@ class ProjectsController < ApplicationController
   # Shared projects
   # GET /projects
   def index
-    @@projects = current_user.shared_projects
+    @projects = current_user.shared_projects
     @tickets = []
 
     # get last 8 tickets that in shared project that current user can access
     count = 0
     Ticket.all.each do |ticket|
-      if @@projects.include? ticket.project
+      if @projects.include? ticket.project
         @tickets.append(ticket)
         count += 1
         if count == 8
