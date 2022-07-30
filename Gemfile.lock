@@ -303,7 +303,6 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  actionmailbox (~> 7.0, >= 7.0.3)
   aws-sdk-s3
   bootsnap
   capybara

@@ -35,12 +35,6 @@ class ProjectsController < ApplicationController
   def edit
   end
 
-  # mailbox not fully implemented
-  # # POST /projects/1/share_project
-  # def share_project
-  #   redirect_to '/rails/conductor/action_mailbox/inbound_emails'
-  # end
-
   # POST /projects/1/invite
   def invite
   end
