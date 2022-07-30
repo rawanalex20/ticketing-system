@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
     @tickets = @tickets.reverse
   end
 
-  # GET /projects/1 or /projects/1.json
+  # GET /projects/1
   def show
   end
 
@@ -74,7 +74,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # POST /projects or /projects.json
+  # POST /projects
   def create
     @project = Project.new(project_params)
     @project.user_id = current_user.id
@@ -82,34 +82,29 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         format.html { redirect_to projects_url, notice: "Project was successfully created." }
-        format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /projects/1 or /projects/1.json
+  # PATCH/PUT /projects/1
   def update
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to projects_url, notice: "Project was successfully updated." }
-        format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /projects/1 or /projects/1.json
+  # DELETE /projects/1
   def destroy
     @project.destroy
 
     respond_to do |format|
       format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

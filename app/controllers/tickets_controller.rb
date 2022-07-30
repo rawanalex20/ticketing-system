@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: %i[ show edit update destroy save_attach attach change_status ]
 
   # All routes are preceeded with project
-  # GET /tickets or /tickets.json
+  # GET /tickets
   def index
     @tickets = Ticket.where(project_id: params[:project_id])
 
@@ -53,7 +53,7 @@ class TicketsController < ApplicationController
     end
   end
 
-  # GET /tickets/1 or /tickets/1.json
+  # GET /tickets/1
   def show
   end
 
@@ -67,7 +67,7 @@ class TicketsController < ApplicationController
   def edit
   end
 
-  # POST /tickets or /tickets.json
+  # POST /tickets
   def create
     @ticket = Ticket.new(ticket_params)
     @ticket.project_id = params[:project_id]
@@ -75,34 +75,29 @@ class TicketsController < ApplicationController
     respond_to do |format|
       if @ticket.save
         format.html { redirect_to project_tickets_url(project_id: @ticket.project.id, id: @ticket.id), notice: "Ticket was successfully created." }
-        format.json { render :show, status: :created, location: @ticket }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /tickets/1 or /tickets/1.json
+  # PATCH/PUT /tickets/1
   def update
     respond_to do |format|
       if @ticket.update(ticket_params)
         format.html { redirect_to project_ticket_url(project_id: @ticket.project.id, id: @ticket.id), notice: "Ticket was successfully updated." }
-        format.json { render :show, status: :ok, location: @ticket }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /tickets/1 or /tickets/1.json
+  # DELETE /tickets/1
   def destroy
     @ticket.destroy
 
     respond_to do |format|
       format.html { redirect_to project_tickets_url, notice: "Ticket was successfully deleted." }
-      format.json { head :no_content }
     end
   end
 
