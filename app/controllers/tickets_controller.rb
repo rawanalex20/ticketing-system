@@ -4,14 +4,14 @@ class TicketsController < ApplicationController
   # All routes are preceeded with project
   # GET /tickets
   def index
-    @tickets = Ticket.where(project_id: params[:project_id])
+    @tickets = current_user.shared_projects.find(params[:project_id]).tickets
 
     # Initialize it to array if its nil for looping
     if @tickets == nil
       @tickets = []
     end
 
-    @project = Project.find(params[:project_id])
+    @project = current_user.shared_projects.find(params[:project_id])
   end
 
   # POST /ticket/1/change_status
@@ -104,7 +104,8 @@ class TicketsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
-      @ticket = Ticket.find(params[:id])
+      @project = current_user.shared_projects.find(params[:project_id])
+      @ticket = @project.tickets.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

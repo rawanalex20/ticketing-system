@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects/1/invite
   def invite
+    @project = current_user.shared_projects.find(params[:project_id])
   end
 
   # POST /projects/1/invite_form
@@ -33,18 +34,16 @@ class ProjectsController < ApplicationController
       # If exists check if it is not the same user
       unless user == nil
         unless user == current_user
-          # Get project to share and email to send to
-          project = Project.find(params[:project_id])
           email = params[:email]
 
           # Check if it is not already shared with this user
-          unless project.editors.include?(user)
+          unless @project.editors.include?(user)
 
             # Perform invitation job
-            InviteMailer.with(project: project, email: email, user: user, current_user: current_user).new_invite_email.deliver_now
+            InviteMailer.with(project: @project, email: email, user: user, current_user: current_user).new_invite_email.deliver_now
 
             # Add user to editors of project so he can access it
-            project.editors.append(user)
+            @project.editors.append(user)
 
             format.html { redirect_to project_tickets_url, notice: "Invitation was successfully sent." }
           else
@@ -96,7 +95,7 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @project = current_user.shared_projects.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
