@@ -48,8 +48,14 @@
         padding-bottom: 2% !important;
         text-align: left !important;
         white-space: normal;
-        overflow-wrap: break-word;
         word-wrap: break-word;
+    }
+    .ticket-title-part {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display:block;
+      width : 90%;
     }
     .image {
       max-width: 100%;
@@ -67,3 +73,9 @@
       margin-top: 10%;
       margin-left: 25%;
     }
+    @media (max-width: 1330px) {
+      .ticket-card {
+        width: 90%;
+      }
+    }
+    

@@ -4,22 +4,27 @@
 <div id="<%= dom_id ticket %>", class="w3-bar-item w3-button w3-padding ticket-card">
 <% end %>
 
-  <h4><strong><%= ticket.title %></strong></h4>
+  <% if request.env['PATH_INFO'] == "/projects/#{@project.id}/tickets/#{ticket.id}" %>
+    <h4><strong><%= ticket.title %></strong></h4>
 
-  <p>
-    <%= ticket.description %>
-  </p>
+    <p class="description">
+      <%= ticket.description %>
+    </p>
+
+    <% ticket.uploads.each do |upload| %> 
+      <% unless @ticket == nil %>
+      <%= image_tag upload %>
+      <% else %>
+      <%= image_tag upload ,class:"image" %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <h4 class="ticket-title-part"><strong><%= ticket.title %></strong></h4>
+  <% end %>
 
   <p>
     <strong>Status: </strong><%= ticket.status %>
   </p>
-  <% ticket.uploads.each do |upload| %> 
-    <% unless @ticket == nil %>
-    <%= image_tag upload %>
-    <% else %>
-    <%= image_tag upload ,class:"image" %>
-    <% end %>
-  <% end %>
 
   <% if ticket.due_set %>
     <div style="color:blue;"><strong>Due date:  </strong><%= ticket.due.strftime('%m/%d/%Y') %></div>
