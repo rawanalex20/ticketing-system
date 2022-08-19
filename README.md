@@ -1,6 +1,6 @@
 # Description
 
-Ticketing System is a simple ticketing web application developed in rails that enables users to create projects, create and update tickets, and grant access for other users to projects. Ticket can have status either todo, in progress or done. Project is shared via email and user invited can access it. Due date can be set once and whenever it is set an active job is shceduled to run on that due date and then check if its status is done or not and if it's not done yet a reminder email is sent to all users sharing this project to remind them of ticket due.
+Ticketing System is a simple ticketing web application developed in rails that enables users to create projects, create and update tickets, and grant access for other users to projects. Ticket can have status either todo, in progress or done. Project is shared via email and user invited can access it. Due date can be set once and whenever it is set an active job is scheduled to run on that due date and then check if its status is done or not and if it's not done yet a reminder email is sent to all users sharing this project to remind them of ticket due.
 
 # Getting Started
 
